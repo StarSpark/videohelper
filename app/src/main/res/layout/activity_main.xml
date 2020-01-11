@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_helper"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="shubao辅助" />
+    <Button
+        android:id="@+id/btn_helper_ws"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="weishi辅助" />
+    <Button
+        android:id="@+id/btn_helper_dy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="dy极速辅助" />
+</LinearLayout>

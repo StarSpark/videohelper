@@ -96,7 +96,7 @@ public class DouYinService extends AccessibilityService {
         if (mAccept&&(pkName.equals(accessibilityEvent.getPackageName()))) {
             mAccept = false;
             mHandler.removeMessages(MSG_A);
-            //延时8s+(0~10s)
+            //延时8s+(0~3s)
             mHandler.sendEmptyMessageDelayed(MSG_A, 8000+mRandom.nextInt(3)*1000);
             mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/imgClose"));
             runOnUiThread(800, new Runnable() {
@@ -121,7 +121,7 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void praise() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4p"));
+        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4l"));
     }
 
 
@@ -138,7 +138,7 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void writeComment() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/q1"));
+        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/px"));
         runOnUiThread(600, new Runnable() {
             @Override
             public void run() {

@@ -99,8 +99,8 @@ public class KuaiShouService extends AccessibilityService {
         if (mAccept&&(pkName.equals(accessibilityEvent.getPackageName()))) {
             mAccept = false;
             mHandler.removeMessages(MSG_A);
-            //延时8s+(0~10s)
-            mHandler.sendEmptyMessageDelayed(MSG_A, 8000+mRandom.nextInt(3)*1000);
+            //延时8s+(0~3s)
+            mHandler.sendEmptyMessageDelayed(MSG_A, 5000+mRandom.nextInt(3)*1000);
             mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/imgClose"));
             runOnUiThread(800, new Runnable() {
                 @Override
@@ -137,7 +137,7 @@ public class KuaiShouService extends AccessibilityService {
 
     private void swipe() {
         int random = mRandom.nextInt(30);
-        mHelper.move(new Point(mScreenWidth / 2 + random, 4 * mScreenHeight / 5 + random), new Point(mScreenWidth / 2 + random, mScreenHeight / 4 + random), 0, 600 + random, null, null);
+        mHelper.move(new Point(mScreenWidth / 2 + random, 5 * mScreenHeight / 6 + random), new Point(mScreenWidth / 2 + random, mScreenHeight / 6 + random), 0, 600 + random, null, null);
     }
 
     private void writeComment() {

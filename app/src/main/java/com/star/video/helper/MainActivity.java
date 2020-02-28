@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 if (ShuaBaoService.isStart()) {
+                    ShuaBaoService.openApp();
                     Toast.makeText(MainActivity.this, "已经开启啦", Toast.LENGTH_LONG).show();
                 } else {
                     startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 if (WeiShiService.isStart()) {
+                    WeiShiService.openApp();
                     Toast.makeText(MainActivity.this, "已经开启啦", Toast.LENGTH_LONG).show();
                 } else {
                     startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity  {
         });
         findViewById(R.id.btn_helper_dy).setOnClickListener(v->{
             if (DouYinService.isStart()) {
+                DouYinService.openApp();
                 Toast.makeText(MainActivity.this, "已经开启啦", Toast.LENGTH_LONG).show();
             } else {
                 startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity  {
         });
         findViewById(R.id.btn_helper_ks).setOnClickListener(v->{
             if (KuaiShouService.isStart()) {
+                KuaiShouService.openApp();
                 Toast.makeText(MainActivity.this, "已经开启啦", Toast.LENGTH_LONG).show();
             } else {
                 startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));

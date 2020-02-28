@@ -38,8 +38,8 @@ public class DouYinService extends AccessibilityService {
     private Random mRandom;
     private int mScreenHeight;
     private int mScreenWidth;
-    private String pkName="com.ss.android.ugc.aweme.lite";
-    private String lclassName="com.ss.android.ugc.aweme.splash.SplashActivity";
+    private static String pkName="com.ss.android.ugc.aweme.lite";
+    private static String lclassName="com.ss.android.ugc.aweme.splash.SplashActivity";
     //private Point mSendPoint = new Point(1007, 1709);
     private Point mSendPoint = new Point(990, 1880);
 
@@ -86,12 +86,7 @@ public class DouYinService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
 //                startApp(pkName,lclassName);
-                Intent intent=new Intent(Helper.MY_BROADCAST);
-                intent.putExtra(Helper.pkName,pkName);
-                intent.putExtra(Helper.lclassName,lclassName);
-                intent.putExtra(Helper.startApp,true);
-                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
-
+                openApp();
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {
@@ -127,6 +122,14 @@ public class DouYinService extends AccessibilityService {
             });
 
         }
+    }
+
+    public static void openApp() {
+        Intent intent=new Intent(Helper.MY_BROADCAST);
+        intent.putExtra(Helper.pkName,pkName);
+        intent.putExtra(Helper.lclassName,lclassName);
+        intent.putExtra(Helper.startApp,true);
+        LocalBroadcastManager.getInstance(MyApplication.getApplication()).sendBroadcast(intent);
     }
 
     private void praise() {

@@ -74,8 +74,8 @@ public class WeiShiService extends AccessibilityService {
             }
         }
     };
-    private String pkName="com.tencent.weishi";
-    private String lclassName="com.tencent.oscar.module.splash.SplashActivity";
+    private static String pkName="com.tencent.weishi";
+    private static String lclassName="com.tencent.oscar.module.splash.SplashActivity";
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (mFirst) {
@@ -84,11 +84,7 @@ public class WeiShiService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
                 //                startApp(pkName);
-                Intent intent=new Intent(Helper.MY_BROADCAST);
-                intent.putExtra(Helper.pkName,pkName);
-                intent.putExtra(Helper.lclassName,lclassName);
-                intent.putExtra(Helper.startApp,true);
-                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
+                openApp();
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {
@@ -125,7 +121,13 @@ public class WeiShiService extends AccessibilityService {
 
         }
     }
-
+    public static void openApp() {
+        Intent intent=new Intent(Helper.MY_BROADCAST);
+        intent.putExtra(Helper.pkName,pkName);
+        intent.putExtra(Helper.lclassName,lclassName);
+        intent.putExtra(Helper.startApp,true);
+        LocalBroadcastManager.getInstance(MyApplication.getApplication()).sendBroadcast(intent);
+    }
     private void praise() {
         mHelper.clickView(mHelper.findViewById("com.tencent.weishi:id/praise"));
     }

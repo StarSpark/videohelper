@@ -80,8 +80,8 @@ public class ShuaBaoService extends AccessibilityService {
             }
         }
     };
-    private String pkName="com.jm.video";
-    private String lclassName="com.jm.video.ui.main.SplashActivity";
+    private static String pkName="com.jm.video";
+    private static String lclassName="com.jm.video.ui.main.SplashActivity";
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (mFirst) {
@@ -90,11 +90,7 @@ public class ShuaBaoService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
 //                startApp(pkName);
-                Intent intent=new Intent(Helper.MY_BROADCAST);
-                intent.putExtra(Helper.pkName,pkName);
-                intent.putExtra(Helper.lclassName,lclassName);
-                intent.putExtra(Helper.startApp,true);
-                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
+                openApp();
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {
@@ -129,6 +125,14 @@ public class ShuaBaoService extends AccessibilityService {
             });
 
         }
+    }
+
+    public static void openApp() {
+        Intent intent=new Intent(Helper.MY_BROADCAST);
+        intent.putExtra(Helper.pkName,pkName);
+        intent.putExtra(Helper.lclassName,lclassName);
+        intent.putExtra(Helper.startApp,true);
+        LocalBroadcastManager.getInstance(MyApplication.getApplication()).sendBroadcast(intent);
     }
 
     private void praise() {

@@ -133,7 +133,7 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void praise() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4p"));
+        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4l"));
     }
 
 
@@ -159,7 +159,7 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void writeComment() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/q1"));
+//        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/px"));
         runOnUiThread(911, new Runnable() {
             @Override
             public void run() {

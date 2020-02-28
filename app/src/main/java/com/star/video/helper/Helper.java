@@ -39,7 +39,10 @@ import static android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HO
  **/
 public class Helper {
 
-
+    public static String pkName="pkName";
+    public static String startApp="startApp";
+    public static String lclassName="lclassName";
+    public static String MY_BROADCAST="net.deniro.android.MY_BROADCAST.action";
     private static Helper mHelper = null;
     private static AccessibilityService mService = null;
 

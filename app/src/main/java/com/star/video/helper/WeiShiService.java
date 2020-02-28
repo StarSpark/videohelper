@@ -17,6 +17,7 @@ import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  *
@@ -74,6 +75,7 @@ public class WeiShiService extends AccessibilityService {
         }
     };
     private String pkName="com.tencent.weishi";
+    private String lclassName="com.tencent.oscar.module.splash.SplashActivity";
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (mFirst) {
@@ -81,7 +83,12 @@ public class WeiShiService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
-                startApp(pkName);
+                //                startApp(pkName);
+                Intent intent=new Intent(Helper.MY_BROADCAST);
+                intent.putExtra(Helper.pkName,pkName);
+                intent.putExtra(Helper.lclassName,lclassName);
+                intent.putExtra(Helper.startApp,true);
+                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {

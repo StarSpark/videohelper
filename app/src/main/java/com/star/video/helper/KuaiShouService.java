@@ -18,6 +18,7 @@ import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  *
@@ -38,6 +39,7 @@ public class KuaiShouService extends AccessibilityService {
     private int mScreenHeight;
     private int mScreenWidth;
     private String pkName="com.kuaishou.nebula";
+    private String lclassName="com.yxcorp.gifshow.HomeActivity";
     //private Point mSendPoint = new Point(1007, 1709);
     private Point mSendPoint = new Point(990, 1880);
 
@@ -85,7 +87,12 @@ public class KuaiShouService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
-                startApp(pkName);
+//                startApp(pkName);
+                Intent intent=new Intent(Helper.MY_BROADCAST);
+                intent.putExtra(Helper.pkName,pkName);
+                intent.putExtra(Helper.lclassName,lclassName);
+                intent.putExtra(Helper.startApp,true);
+                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {

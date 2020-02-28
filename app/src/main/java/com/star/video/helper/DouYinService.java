@@ -2,6 +2,7 @@ package com.star.video.helper;
 
 import android.accessibilityservice.AccessibilityService;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
@@ -17,6 +18,7 @@ import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  *
@@ -37,6 +39,7 @@ public class DouYinService extends AccessibilityService {
     private int mScreenHeight;
     private int mScreenWidth;
     private String pkName="com.ss.android.ugc.aweme.lite";
+    private String lclassName="com.ss.android.ugc.aweme.splash.SplashActivity";
     //private Point mSendPoint = new Point(1007, 1709);
     private Point mSendPoint = new Point(990, 1880);
 
@@ -82,7 +85,13 @@ public class DouYinService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
-                startApp(pkName);
+//                startApp(pkName,lclassName);
+                Intent intent=new Intent(Helper.MY_BROADCAST);
+                intent.putExtra(Helper.pkName,pkName);
+                intent.putExtra(Helper.lclassName,lclassName);
+                intent.putExtra(Helper.startApp,true);
+                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
+
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {
@@ -121,14 +130,23 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void praise() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4l"));
+        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/a4p"));
     }
 
 
     private void startApp(String pkgName) {
         PackageManager packageManager = getPackageManager();
         Intent intent = packageManager.getLaunchIntentForPackage(pkgName);
+        if (intent!=null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
+    private void startApp(String pkgName,String launcherClassName) {
+        ComponentName com = new ComponentName(pkgName, launcherClassName); //package;class
+        Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setComponent(com);
         startActivity(intent);
     }
 
@@ -138,8 +156,8 @@ public class DouYinService extends AccessibilityService {
     }
 
     private void writeComment() {
-        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/px"));
-        runOnUiThread(600, new Runnable() {
+        mHelper.clickView(mHelper.findViewById("com.ss.android.ugc.aweme.lite:id/q1"));
+        runOnUiThread(911, new Runnable() {
             @Override
             public void run() {
                 DouYinService.this.performGlobalAction(GLOBAL_ACTION_BACK);

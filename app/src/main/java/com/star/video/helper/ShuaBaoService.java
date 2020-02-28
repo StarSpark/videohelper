@@ -20,6 +20,7 @@ import com.star.video.helper.util.AppUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.List;
 import java.util.Random;
@@ -80,6 +81,7 @@ public class ShuaBaoService extends AccessibilityService {
         }
     };
     private String pkName="com.jm.video";
+    private String lclassName="com.jm.video.ui.main.SplashActivity";
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (mFirst) {
@@ -87,7 +89,12 @@ public class ShuaBaoService extends AccessibilityService {
             performGlobalAction(GLOBAL_ACTION_BACK);
             performGlobalAction(GLOBAL_ACTION_BACK);
             if (AppUtils.checkApkExist(pkName)) {
-                startApp(pkName);
+//                startApp(pkName);
+                Intent intent=new Intent(Helper.MY_BROADCAST);
+                intent.putExtra(Helper.pkName,pkName);
+                intent.putExtra(Helper.lclassName,lclassName);
+                intent.putExtra(Helper.startApp,true);
+                LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
             }
             mHandler.sendEmptyMessage(MSG_C);
             runOnUiThread(2500, new Runnable() {
